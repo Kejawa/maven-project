@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    parameters {
+        string defaultValue: 'kj', name: 'LASTNAME'
+    }
+
+    environment{
+        NAME = "temi"
+    }
     tools {
         maven 'mymaven'
     }    
@@ -8,6 +15,7 @@ pipeline {
         {
             steps {
                 sh 'mvn clean package'
+                echo "hello $NAME $(params.LASTNAME)"
             }
 
             post {
